@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matieri - A Essência dos Materiais</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --primary-light: #f8f5f0;
+            --accent-gold: #c6a969;
+            --accent-burgundy: #8a2f2f;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to bottom, #0f0c1d, #2a2438);
+            color: var(--primary-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 10%, var(--primary-dark) 90%);
+            opacity: 0.7;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--accent-gold);
+            max-width: 800px;
+            animation: fadeIn 2s ease-out;
+        }
+        
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 5.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+            text-shadow: 0 0 15px rgba(198, 169, 105, 0.5);
+            letter-spacing: 8px;
+        }
+        
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: var(--primary-light);
+        }
+        
+        .esoteric-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #d6d0e0;
+            text-align: center;
+        }
+        
+        .meanings {
+            padding: 100px 0;
+            background: rgba(10, 8, 23, 0.8);
+        }
+        
+        h2 {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            color: var(--accent-gold);
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--accent-burgundy);
+            margin: 15px auto 0;
+        }
+        
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .language-card {
+            background: linear-gradient(145deg, #1e1b2e, #2a2438);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid rgba(198, 169, 105, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .language-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--accent-gold), var(--accent-burgundy));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .language-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .language-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+        
+        .flag {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+        }
+        
+        .language-name {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .meaning {
+            font-style: italic;
+            margin-bottom: 15px;
+            min-height: 80px;
+            color: #c5b9d9;
+        }
+        
+        .pronunciation {
+            color: var(--accent-burgundy);
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+        }
+        
+        .philosophy {
+            padding: 100px 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%231a1730" width="100" height="100"/><path fill="%23221e3a" d="M0 0L100 100M100 0L0 100" stroke-width="0.5"/></svg>');
+        }
+        
+        .philosophy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        
+        .philosophy-content p {
+            margin-bottom: 30px;
+        }
+        
+        .quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            padding: 40px;
+            border-left: 3px solid var(--accent-burgundy);
+            text-align: left;
+            margin: 50px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0 15px 15px 0;
+        }
+        
+        footer {
+            background: var(--primary-dark);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(198, 169, 105, 0.3);
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+        
+        .language-btn {
+            background: rgba(198, 169, 105, 0.2);
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .language-btn:hover {
+            background: rgba(198, 169, 105, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle linear infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .header-content {
+                padding: 20px;
+            }
+            
+            .language-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quote {
+                font-size: 1.4rem;
+                padding: 20px;
+            }
+            
+            .language-switcher {
+                top: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="language-switcher">
+        <a href="matieri-en.html" class="language-btn">English Version</a>
+    </div>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>MATIERI</h1>
+                <p class="subtitle">A Essência dos Materiais através das Línguas e do Esoterismo</p>
+                <div class="esoteric-description">
+                    Matieri representa a manifestação física do espírito universal através dos materiais, a corporeização da energia cósmica que se condensa em forma tangível. Mais do que simples matéria, é a essência dos materiais que compõem a realidade, o véu ilusório que encobre a verdade eterna, onde o divino se encontra com o terreno, permitindo à alma experimentar a densidade e à consciência transcender a ilusão da forma material.
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section class="meanings">
+        <div class="container">
+            <h2>Significados Multidimensionais</h2>
+            <div class="language-grid">
+                <div class="language-card">
+                    <div class="flag">🇮🇹</div>
+                    <div class="language-name">Italiano</div>
+                    <div class="meaning">Materiais, substâncias primordiais, a essência física da criação</div>
+                    <div class="pronunciation">[maˈtjɛːri]</div>
+                </div>
+                
+                <div class="language-card">
+                    <div class="flag">🇬🇧</div>
+                    <div class="language-name">Inglês</div>
+                    <div class="meaning">Materials, the primordial substances of existence, the fabric of perceptible reality</div>
+                    <div class="pronunciation">[məˈtɪəriəlz]</div>
+                </div>
+                
+                <div class="language-card">
+                    <div class="flag">🇸🇦</div>
+                    <div class="language-name">Árabe</div>
+                    <div class="meaning">مواد (Mawadd) - Os materiais fundamentais que compõem a criação</div>
+                    <div class="pronunciation">[mawaːdd]</div>
+                </div>
+                
+                <div class="language-card">
+                    <div class="flag">🇮🇳</div>
+                    <div class="language-name">Sânscrito</div>
+                    <div class="meaning">द्रव्य (Dravya) - A substância primordial, os materiais não-manifestos</div>
+                    <div class="pronunciation">[drɐʋjɐ]</div>
+                </div>
+                
+                <div class="language-card">
+                    <div class="flag">🇨🇳</div>
+                    <div class="language-name">Chinês</div>
+                    <div class="meaning">材料 (Cáiliào) - A essência material, os elementos físicos da existência</div>
+                    <div class="pronunciation">[tsʰǎi.ljâʊ]</div>
+                </div>
+                
+                <div class="language-card">
+                    <div class="flag">🇬🇷</div>
+                    <div class="language-name">Grego Antigo</div>
+                    <div class="meaning">Ὕλη (Hylē) - Os materiais primordiais, o potencial não-formado</div>
+                    <div class="pronunciation">[hyː.lɛː]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="philosophy">
+        <div class="container">
+            <div class="philosophy-content">
+                <h2>Filosofia Esotérica dos Materiais</h2>
+                <p>Na tradição esotérica, os matieri são vistos como o véu de Maya, a ilusão da separação que permite à consciência divina experimentar a si mesma através da limitação material. É o princípio feminino universal, o receptáculo que acolhe e manifesta a centelha criativa do espírito em forma física.</p>
+                
+                <div class="quote">
+                    "Os materiais são espírito condensado, assim como o espírito é matéria sublimada. Em sua essência, são uma só coisa, manifestando-se em diferentes estados vibratórios através dos matieri."
+                </div>
+                
+                <p>Através das culturas e tradições, a palavra matieri e seus equivalentes carregam não apenas significados linguísticos, mas conceitos filosóficos profundos sobre a natureza da realidade material, a relação entre forma e vazio, e o diálogo eterno entre o material e o espiritual que se expressa através dos elementos tangíveis.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 - Matieri | Uma Jornada Alquímica através dos Materiais e da Linguagem</p>
+        </div>
+    </footer>
+
+    <script>
+        // Criar estrelas de fundo
+        document.addEventListener('DOMContentLoaded', function() {
+            const starsContainer = document.getElementById('stars');
+            const starsCount = 150;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                
+                starsContainer.appendChild(star);
+            }
+            
+            // Efeito de parallax suave
+            document.addEventListener('mousemove', function(e) {
+                const moveX = (e.clientX - window.innerWidth / 2) / 25;
+                const moveY = (e.clientY - window.innerHeight / 2) / 25;
+                
+                document.querySelector('header').style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
